@@ -8,7 +8,6 @@ on:
 
   workflow_dispatch:
 
-
 jobs:
 
   deployInfrastructure:
@@ -34,7 +33,7 @@ jobs:
         run: npm install
       
       - name: Bootstrap 
-        run: npm run bootstrap --workspace="cdk-infra"
+        run: npm run bootstrap
         
       - name: Deploy
         run: npm run deploy
