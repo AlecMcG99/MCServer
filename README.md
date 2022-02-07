@@ -1,6 +1,8 @@
 # MCServer
 
-The goal of this project is to create a minecraft and a hexxit 2 server using an ec2 instance in aws that I can start and stop using a discord bot
+The goal of this project is to create a minecraft and a hexxit 2 server using an ec2 instance in aws that I can start and stop using a discord bot.
+
+I built out the infrastructure using the aws console in November but I'm rebuilding using aws-cdk so everything is more organized, I can make improvements easier, and I can show it on my github profile. 
 
 # Project Flow
 
