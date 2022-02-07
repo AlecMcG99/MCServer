@@ -2,13 +2,11 @@
   "name": "cdk-infra",
   "version": "0.1.0",
   "bin": {
-    "cdk-infra": "bin/cdk-infra.js"
+    "cdk-infra": "packages/bin/cdk-infra.js"
   },
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w",
-    "test": "jest",
-    "cdk": "cdk"
+    "bootstrap": "npm run bootstrap --workspace='cdk-infra'",
+    "deploy": "npm run deploy --workspace='cdk-infra'"
   },
   "devDependencies": {
     "@types/node": "10.17.27",
@@ -19,5 +17,8 @@
   "dependencies": {
     "aws-cdk-lib": "2.10.0",
     "constructs": "^10.0.0"
-  }
+  },
+  "workspaces": [
+    "packages\\cdk-infra"
+  ]
 }

@@ -1,0 +1,12 @@
+{
+  "name": "cdk-infra",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bin/cdk-infra.ts",
+  "scripts": {
+    "synth": "cdk synth",
+    "deploy": "cdk deploy",
+    "bootstrap": "cdk bootstrap"
+  },
+  "author": "Alec McGlasson"
+}

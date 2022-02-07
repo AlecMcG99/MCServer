@@ -1,10 +1,10 @@
 name: Deploy CDK Infrastructure Stacks to AWS
 
 on:
-#   push:
-#     paths: 
-#       - packages/cdk-infra/**
-#       - .github/workflows/cdk-infra-deploy.yml
+  push:
+    paths: 
+      - packages/cdk-infra/**
+      - .github/workflows/cdk-infra-deploy.yml
 
   workflow_dispatch:
 
@@ -32,6 +32,9 @@ jobs:
           
       - name: Install npm dependencies
         run: npm install
+      
+      - name: Bootstrap 
+        run: npm run bootstrap --workspace="cdk-infra"
         
       - name: Deploy
         run: npm run deploy
