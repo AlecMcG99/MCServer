@@ -1,14 +1,12 @@
-# Welcome to your CDK TypeScript project!
+# MCServer
 
-This is a blank project for TypeScript development with CDK.
+The goal of this project is to create a minecraft and a hexxit 2 server using an ec2 instance in aws that I can start and stop using a discord bot
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+# Project Flow
 
-## Useful commands
+Here is how the application works: 
 
- * `npm run build`   compile typescript to js
- * `npm run watch`   watch for changes and compile
- * `npm run test`    perform the jest unit tests
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk synth`       emits the synthesized CloudFormation template
+User uses start command on discord server -> Discord bot sends interaction to API Gateway -> API Gateway triggers Lambda Function -> Lambda Function determines which server to spin up based on the event sent to API Gateway -> Lambda Function spins up ec2 instance for the correct server-> ec2 Instance runs script when it boots up to start minecraft server -> EventBridge rule gets triggered by the ec2 instance starting up -> EventBridge rule assigns the elastic ip to the server that just booted up. 
+
+# Development
+The cdk app was written in typescript in a nodejs runtime environment.
