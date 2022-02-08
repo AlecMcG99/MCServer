@@ -38,7 +38,7 @@ export class CdkInfraStack extends Stack {
     
     this.discordEventHandler = new Function(this, 'discord-event-handler-lambda', {
       code: Code.fromAsset('./lambdas'), 
-      handler: 'discord-event-handler.handler', 
+      handler: 'index.handler', 
       runtime: Runtime.NODEJS_14_X, 
       environment: {
         DISCORD_PUBLIC_KEY: process.env.DISCORD_PUBLIC_KEY, 
