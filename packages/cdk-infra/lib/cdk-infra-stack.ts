@@ -1,6 +1,7 @@
 import { Stack, StackProps } from 'aws-cdk-lib';
 import { Instance, InstanceType, MachineImage, SecurityGroup, Vpc } from 'aws-cdk-lib/aws-ec2';
 import { Code, Function, Runtime } from 'aws-cdk-lib/aws-lambda';
+import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Construct } from 'constructs';
 
 
@@ -31,10 +32,10 @@ export class CdkInfraStack extends Stack {
       securityGroup: mcSecurityGroup
     });
     
-    this.discordEventHandler = new Function(this, 'discord-event-handler-lambda', {
-      functionName: 'discord-event-handler',
-      code: Code.fromAsset('./dist'), 
-      handler: 'discord-event-handler.handler', 
+    this.discordEventHandler = new NodejsFunction(this, 'discord-event-handler-lambda', {
+      functionName: 'discord-event-handler', 
+      entry: '../lambdas/discord-event-handler.ts',
+      // handler: 'discord-event-handler.handler', 
       runtime: Runtime.NODEJS_14_X, 
       environment: {
         DISCORD_PUBLIC_KEY: process.env.DISCORD_PUBLIC_KEY!, 

@@ -4,7 +4,6 @@
   "description": "",
   "main": "bin/cdk-infra.ts",
   "scripts": {
-    "build": "tsc -b lambdas",
     "synth": "cdk synth",
     "deploy": "cdk deploy --require-approval never",
     "bootstrap": "cdk bootstrap"
@@ -18,8 +17,7 @@
   },
   "dependencies": {
     "aws-cdk-lib": "2.10.0",
-    "constructs": "^10.0.0",
-    "discord-interactions": "^2.4.1"
+    "constructs": "^10.0.0"
   },
   "author": "Alec McGlasson"
 }

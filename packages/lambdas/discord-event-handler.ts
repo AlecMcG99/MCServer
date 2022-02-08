@@ -1,8 +1,8 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResultV2 } from "aws-lambda";
+import * as AWS from "aws-sdk";
+import { verifyKey } from "discord-interactions";
 
-const AWS = require("aws-sdk");
-const { verifyKey } = require('discord-interactions');
-var ec2 = new AWS.EC2();
+const ec2 = new AWS.EC2();
 
 export interface Server {
     serverType: string,
@@ -10,7 +10,7 @@ export interface Server {
 };
 
 
-exports.handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResultV2> => {
+export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResultV2> => {
     console.log("received event: " + JSON.stringify(event, null, 2));
     try {
         if (!verify_signature(event)) {
@@ -58,7 +58,7 @@ exports.handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyRe
     catch (error) {
         console.error(error);
         const response = {
-            statusCode:  500,
+            statusCode: 500,
             body: JSON.stringify({ type: 4, data: { content: "lambda failed: " + error } }),
         };
         return response;
@@ -67,8 +67,8 @@ exports.handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyRe
 
 async function startServer(server: Server) {
     try {
-        var params = {
-            InstanceIds: server.instanceId,
+        const params = {
+            InstanceIds: [server.instanceId],
         };
         console.log("starting " + server.serverType + " server");
         await ec2.startInstances(params).promise();
@@ -94,8 +94,8 @@ async function startServer(server: Server) {
 
 async function stopServer(server: Server) {
     try {
-        var params = {
-            InstanceIds: server.instanceId
+        const params = {
+            InstanceIds: [server.instanceId]
         };
         console.log("Stopping " + server.serverType + " server")
         await ec2.stopInstances(params).promise();
@@ -121,7 +121,7 @@ async function stopServer(server: Server) {
 
 async function checkStatus(server: Server) {
     try {
-        var params = { InstanceIds: server.instanceId }
+        const params = { InstanceIds: [server.instanceId] }
         console.log("checking server status")
         const state = await ec2.describeInstances(params).promise()
         console.log("State:" + JSON.stringify(state))
@@ -149,7 +149,7 @@ function verify_signature(event: APIGatewayProxyEvent) {
     const signature = event.headers['x-signature-ed25519'];
     const timestamp = event.headers['x-signature-timestamp'];
     const body = event.body
-    const verified = verifyKey(body, signature, timestamp, process.env.DISCORD_PUBLIC_KEY)
+    const verified = verifyKey(body!, signature!, timestamp!, process.env.DISCORD_PUBLIC_KEY!)
     if (verified) { console.log("Signature Verified!") };
     return verified
 }
