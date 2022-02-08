@@ -5,8 +5,8 @@
     "cdk-infra": "packages/bin/cdk-infra.ts"
   },
   "scripts": {
-    "bootstrap": "npm run bootstrap --workspace=packages\\cdk-infra",
-    "deploy": "npm run deploy --workspace='cdk-infra'"
+    "bootstrap": "npm run bootstrap -w cdk-infra",
+    "deploy": "npm run deploy -w cdk-infra"
   },
   "workspaces": [
     "packages\\cdk-infra"
