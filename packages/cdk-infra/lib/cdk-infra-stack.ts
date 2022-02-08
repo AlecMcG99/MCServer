@@ -1,15 +1,32 @@
 import { Stack, StackProps } from 'aws-cdk-lib';
+import { Instance, InstanceType, MachineImage, SecurityGroup, Vpc } from 'aws-cdk-lib/aws-ec2';
 import { Construct } from 'constructs';
 
+
 export class CdkInfraStack extends Stack {
+  readonly vanillaServerEC2: Instance;
+  readonly hexxitServerEC2: Instance;
+
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
+    const serverVpc = Vpc.fromLookup(this, 'mcVPC', {
+      vpcId: 'vpc-065e74560509b0075'
+    });
+    const mcSecurityGroup = SecurityGroup.fromSecurityGroupId(this, 'mcSecurityGroup', 'sg-08aa5f2fb753f312c')
 
-    // example resource
-    // const queue = new sqs.Queue(this, 'CdkInfraQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+    this.vanillaServerEC2 = new Instance(this, "Minecraft Server", {
+      instanceType: new InstanceType("t2.medium"),
+      vpc: serverVpc,
+      machineImage: MachineImage.latestAmazonLinux(), 
+      securityGroup: mcSecurityGroup
+    });
+
+    this.hexxitServerEC2 = new Instance(this, "Hexxit Server", {
+      instanceType: new InstanceType("t3.medium"), 
+      vpc: serverVpc,
+      machineImage: MachineImage.latestAmazonLinux(), 
+      securityGroup: mcSecurityGroup
+    });
   }
 }
