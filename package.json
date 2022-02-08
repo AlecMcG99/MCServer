@@ -9,6 +9,6 @@
     "deploy": "npm run deploy -w cdk-infra"
   },
   "workspaces": [
-    "packages\\cdk-infra"
+    "packages/cdk-infra"
   ]
 }
