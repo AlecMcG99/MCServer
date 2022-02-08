@@ -6,7 +6,8 @@
   },
   "scripts": {
     "bootstrap": "npm run bootstrap -w cdk-infra",
-    "deploy": "npm run deploy -w cdk-infra"
+    "deploy": "npm run deploy -w cdk-infra",
+    "build": "npm run build -w cdk-infra" 
   },
   "workspaces": [
     "packages/cdk-infra"

@@ -7,7 +7,7 @@ import { Construct } from 'constructs';
 export class CdkInfraStack extends Stack {
   readonly vanillaServerEC2: Instance;
   readonly hexxitServerEC2: Instance;
-  readonly discordEventHandler: Function
+  readonly discordEventHandler: Function;
   
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
@@ -15,7 +15,7 @@ export class CdkInfraStack extends Stack {
     const serverVpc = Vpc.fromLookup(this, 'mcVPC', {
       vpcId: 'vpc-065e74560509b0075'
     });
-    const mcSecurityGroup = SecurityGroup.fromSecurityGroupId(this, 'mcSecurityGroup', 'sg-08aa5f2fb753f312c')
+    const mcSecurityGroup = SecurityGroup.fromSecurityGroupId(this, 'mcSecurityGroup', 'sg-08aa5f2fb753f312c');
     
     this.vanillaServerEC2 = new Instance(this, "Minecraft Server", {
       instanceType: new InstanceType("t2.medium"),
@@ -42,6 +42,5 @@ export class CdkInfraStack extends Stack {
         HEXXIT_INSTANCE_ID: this.hexxitServerEC2.instanceId
       }
     });
-    
   }
 }
