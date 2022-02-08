@@ -32,7 +32,9 @@ jobs:
       - name: Install npm dependencies
         run: npm install
       
-      - run: npm list --workspaces
+      - run: ls
+      
+      - run:  cd packages && ls
       
       - name: Bootstrap 
         run: npm run bootstrap
