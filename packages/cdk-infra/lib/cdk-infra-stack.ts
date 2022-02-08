@@ -37,7 +37,8 @@ export class CdkInfraStack extends Stack {
     }
     
     this.discordEventHandler = new Function(this, 'discord-event-handler-lambda', {
-      code: Code.fromAsset('./lambdas'), 
+      functionName: 'discord-event-handler',
+      code: Code.fromAsset('./dist'), 
       handler: 'discord-event-handler.handler', 
       runtime: Runtime.NODEJS_14_X, 
       environment: {

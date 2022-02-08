@@ -4,6 +4,7 @@
   "description": "",
   "main": "bin/cdk-infra.ts",
   "scripts": {
+    "build": "tsc -b lambdas",
     "synth": "cdk synth",
     "deploy": "cdk deploy --require-approval never",
     "bootstrap": "cdk bootstrap"
