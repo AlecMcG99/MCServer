@@ -34,21 +34,21 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
                 }
             };
         }
-        const command = JSON.parse(eventBody.data);
+        const command = eventBody.data;
         const server: Server = {
             serverType: command.options[0].value,
             instanceId: command.options[0] === 'Vanilla' ? process.env.VANILLA_INSTANCE_ID! : process.env.HEXXIT_INSTANCE_ID!
         }
 
-        let response = { statusCode: 404, body: JSON.stringify({ type: 4, data: { content: command + "is not a valid command" } }) };
+        let response = { statusCode: 404, body: JSON.stringify({ type: 4, data: { content: command.name + "is not a valid command" } }) };
 
-        if (command === "start") {
+        if (command.name === "start") {
             response = await startServer(server);
         }
-        else if (command === "stop") {
+        else if (command.name === "stop") {
             response = await stopServer(server);
         }
-        else if (command === "status") {
+        else if (command.name === "status") {
             response = await checkStatus(server);
         }
 
