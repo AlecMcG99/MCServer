@@ -10,7 +10,9 @@ export class CdkInfraStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const serverVpc = new Vpc(this, "serverVpc");
+    const serverVpc = Vpc.fromLookup(this, 'mcVPC', {
+      vpcId: 'vpc-065e74560509b0075'
+    });
     const mcSecurityGroup = SecurityGroup.fromSecurityGroupId(this, 'mcSecurityGroup', 'sg-08aa5f2fb753f312c')
 
     this.vanillaServerEC2 = new Instance(this, "Minecraft Server", {
