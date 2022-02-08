@@ -11,17 +11,20 @@ export class CdkInfraStack extends Stack {
     super(scope, id, props);
 
     const serverVpc = new Vpc(this, "serverVpc");
+    const mcSecurityGroup = SecurityGroup.fromSecurityGroupId(this, 'mcSecurityGroup', 'sg-08aa5f2fb753f312c')
 
     this.vanillaServerEC2 = new Instance(this, "Minecraft Server", {
       instanceType: new InstanceType("t2.medium"),
       vpc: serverVpc,
-      machineImage: MachineImage.latestAmazonLinux()
+      machineImage: MachineImage.latestAmazonLinux(), 
+      securityGroup: mcSecurityGroup
     });
 
     this.hexxitServerEC2 = new Instance(this, "Hexxit Server", {
       instanceType: new InstanceType("t3.medium"), 
       vpc: serverVpc,
-      machineImage: MachineImage.latestAmazonLinux()
+      machineImage: MachineImage.latestAmazonLinux(), 
+      securityGroup: mcSecurityGroup
     });
   }
 }
