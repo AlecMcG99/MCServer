@@ -30,11 +30,6 @@ export class CdkInfraStack extends Stack {
       machineImage: MachineImage.latestAmazonLinux(), 
       securityGroup: mcSecurityGroup
     });
-
-    if(!process.env.DISCORD_PUBLIC_KEY){
-      console.log("can't find discord public key")
-      process.exit(1)
-    }
     
     this.discordEventHandler = new Function(this, 'discord-event-handler-lambda', {
       functionName: 'discord-event-handler',
@@ -42,7 +37,7 @@ export class CdkInfraStack extends Stack {
       handler: 'discord-event-handler.handler', 
       runtime: Runtime.NODEJS_14_X, 
       environment: {
-        DISCORD_PUBLIC_KEY: process.env.DISCORD_PUBLIC_KEY, 
+        DISCORD_PUBLIC_KEY: process.env.DISCORD_PUBLIC_KEY!, 
         VANILLA_INSTANCE_ID: this.vanillaServerEC2.instanceId,
         HEXXIT_INSTANCE_ID: this.hexxitServerEC2.instanceId
       }
