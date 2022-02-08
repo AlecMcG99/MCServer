@@ -16,14 +16,14 @@ export class CdkInfraStack extends Stack {
       instanceType: new InstanceType("t2.medium"),
       vpc: serverVpc,
       machineImage: MachineImage.latestAmazonLinux(), 
-      securityGroup: SecurityGroup.fromLookupById(this, "mcSecurityGroup", 'sg-08aa5f2fb753f312c')
+      securityGroup: SecurityGroup.fromSecurityGroupId(this, "mcSecurityGroup", 'sg-08aa5f2fb753f312c', {mutable: false})
     });
 
     this.hexxitServerEC2 = new Instance(this, "Hexxit Server", {
       instanceType: new InstanceType("t3.medium"), 
       vpc: serverVpc,
       machineImage: MachineImage.latestAmazonLinux(), 
-      securityGroup: SecurityGroup.fromLookupById(this, "mcSecurityGroup", 'sg-08aa5f2fb753f312c')
+      securityGroup: SecurityGroup.fromSecurityGroupId(this, "mcSecurityGroup", 'sg-08aa5f2fb753f312c', {mutable: false})
     });
   }
 }
