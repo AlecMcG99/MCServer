@@ -1,5 +1,6 @@
 import { Stack, StackProps } from 'aws-cdk-lib';
 import { Instance, InstanceType, MachineImage, SecurityGroup, Vpc } from 'aws-cdk-lib/aws-ec2';
+import { Effect, PolicyStatement, Role } from 'aws-cdk-lib/aws-iam';
 import { Code, Function, Runtime } from 'aws-cdk-lib/aws-lambda';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Construct } from 'constructs';
@@ -35,13 +36,18 @@ export class CdkInfraStack extends Stack {
     this.discordEventHandler = new NodejsFunction(this, 'discord-event-handler-lambda', {
       functionName: 'discord-event-handler', 
       entry: '../lambdas/discord-event-handler.ts',
-      // handler: 'discord-event-handler.handler', 
       runtime: Runtime.NODEJS_14_X, 
       environment: {
         DISCORD_PUBLIC_KEY: process.env.DISCORD_PUBLIC_KEY!, 
         VANILLA_INSTANCE_ID: this.vanillaServerEC2.instanceId,
         HEXXIT_INSTANCE_ID: this.hexxitServerEC2.instanceId
       }
-    });
+    })
+    
+    this.discordEventHandler.addToRolePolicy(new PolicyStatement({
+      actions: ["ec2.*"], 
+      effect: Effect.ALLOW, 
+      resources: ["*"]
+    }));
   }
 }

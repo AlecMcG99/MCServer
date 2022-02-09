@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "esbuild --bundle --platform=node discord-event-handler.ts --outdir=./dist"
   },
   "author": "Alec McGlasson",
   "devDependencies": {
