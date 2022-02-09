@@ -12,3 +12,4 @@ User uses start command on discord server -> Discord bot sends interaction to AP
 
 # Development
 The cdk app was written in typescript in a nodejs runtime environment.
+The cdk app gets deployed using an automated pipeline built with github actions.
