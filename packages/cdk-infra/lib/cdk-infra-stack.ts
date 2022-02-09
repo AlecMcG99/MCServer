@@ -54,10 +54,11 @@ export class CdkInfraStack extends Stack {
 
     this.serverApi = new LambdaRestApi(this, 'server-api', {
       handler: this.discordEventHandler,
-      restApiName: 'server-api'
+      restApiName: 'server-api', 
+      proxy: false
     });
 
-    const eventEndpoint = this.serverApi.root.addMethod('POST', undefined, {
+    this.serverApi.root.addResource('discord-event').addMethod('POST', undefined, {
       methodResponses: [
         { statusCode: "200" },
         { statusCode: "401" },
