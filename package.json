@@ -6,9 +6,11 @@
   },
   "scripts": {
     "bootstrap": "npm run bootstrap -w cdk-infra",
-    "deploy": "npm run deploy -w cdk-infra"
+    "deploy": "npm run deploy -w cdk-infra",
+    "build": "npm run build -w lambdas"
   },
   "workspaces": [
-    "packages/cdk-infra"
+    "packages/cdk-infra",
+    "packages/lambdas"
   ]
 }

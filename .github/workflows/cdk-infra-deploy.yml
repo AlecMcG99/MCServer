@@ -8,6 +8,9 @@ on:
 
   workflow_dispatch:
 
+env:
+  DISCORD_PUBLIC_KEY: ${{ secrets.DISCORD_PUBLIC_KEY }}
+
 jobs:
 
   deployInfrastructure:
