@@ -45,7 +45,7 @@ export class CdkInfraStack extends Stack {
     })
     
     this.discordEventHandler.addToRolePolicy(new PolicyStatement({
-      actions: ["ec2.*"], 
+      actions: ["ec2:*"], 
       effect: Effect.ALLOW, 
       resources: ["*"]
     }));
